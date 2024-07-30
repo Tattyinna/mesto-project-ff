@@ -1,3 +1,11 @@
+// Добавление класса popup_is-animated ко всем попапам при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  const popups = document.querySelectorAll('.popup');
+  popups.forEach(popup => {
+    popup.classList.add('popup_is-animated');
+  });
+});
+
 // Функция открытия попапа
 export function openPopup(popup) {
   popup.classList.add('popup_is-opened');
@@ -8,7 +16,6 @@ export function openPopup(popup) {
 // Функция закрытия попапа
 export function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
-  popup.classList.add('popup_is-animated');
   document.removeEventListener('keydown', handleEscKey); // Удаляем обработчик нажатия клавиши Esc
   popup.removeEventListener('click', handleOverlayClick); // Удаляем обработчик клика по оверлею
 }

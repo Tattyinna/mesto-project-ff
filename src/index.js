@@ -1,7 +1,7 @@
 import './pages/index.css'; // импорт главного файла стилей
 import { initialCards } from './scripts/cards.js'; // импорт массива карточек
 import { openPopup, closePopup, handleEscKey, handleOverlayClick} from './scripts/modal.js'; // импорт работы модальных окон
-import {createCard, handleDelete, handleLike, addCard } from './scripts/card.js';
+import {createCard, handleDelete, handleLike } from './scripts/card.js';
 
 const editProfileButton = document.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup_type_edit');
@@ -21,9 +21,10 @@ const imagePopup = document.querySelector('.popup_type_image');
 const openImagePopup = document.querySelector('.popup__content_content_image');
 const imageSrc = openImagePopup.querySelector('.popup__image');
 const imageCaption = openImagePopup.querySelector('.popup__caption');
+const cardContainer = document.querySelector(".places__list");
 
 // Функция формы данных пользователя
-function handleFormSubmit(evt) {
+function editProfileFormSubmit(evt) {
   evt.preventDefault(); // Отменяем стандартное действие формы
   const name = nameInput.value;   // Получаем значения из полей формы
   const description = jobInput.value;  // Получаем значения из полей формы
@@ -33,7 +34,7 @@ function handleFormSubmit(evt) {
 }
 
 // Функция формы ввода данных новой карточки
-function newCardFormSubmit(evt) {
+function addNewCardFormSubmit(evt) {
   evt.preventDefault(); // Отменяем стандартное действие формы
   const placeName = newCardNameInput.value;   // Получаем значения из полей формы
   const placeLink = newCardLinkInput.value;  // Получаем значения из полей формы
@@ -46,10 +47,10 @@ function newCardFormSubmit(evt) {
 initialCards.forEach(card => addCard(card.name, card.link, openImage, handleDelete, handleLike));
 
 // Обработчик отправки формы данных пользователя
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', editProfileFormSubmit);
 
 // Обработчик отправки формы ввода данных новой карточки
-newCardForm.addEventListener('submit', newCardFormSubmit);
+newCardForm.addEventListener('submit', addNewCardFormSubmit);
 
 // Обработчик закрытия попапов
 closeButtons.forEach(button => {
@@ -77,6 +78,12 @@ function openImage(imageLink, imageAlt) {
   imageSrc.alt = imageAlt;
   imageCaption.textContent = imageAlt;
   openPopup(imagePopup);
+}
+
+// Функция добавления новой карточки
+function addCard(name, link, openImage, handleDelete, handleLike) {
+  const cardElement = createCard(name, link, openImage, handleDelete, handleLike);
+  cardContainer.prepend(cardElement);
 }
 
 

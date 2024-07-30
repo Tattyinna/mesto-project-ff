@@ -1,5 +1,4 @@
 const cardTemplate = document.querySelector("#card-template").content;
-const cardContainer = document.querySelector(".places__list");
 
 // Функция создания карточки
 export function createCard(name, link, openImage, handleDelete, handleLike) {
@@ -30,8 +29,3 @@ export function handleLike(event) {
     event.target.classList.toggle('card__like-button_is-active');
   }
   
-// Функция добавления новой карточки
-export function addCard(name, link, openImage, handleDelete, handleLike) {
-  const cardElement = createCard(name, link, openImage, handleDelete, handleLike);
-  cardContainer.prepend(cardElement);
-}
