@@ -41,6 +41,16 @@ export function createCard(
   return cardElement;
 }
 
+// Функция удаления карточки
+export function deleteButtonClickHandler(cardId, cardElement) {
+  deleteCard (cardId)
+    .then(() => {
+      cardElement.remove();
+    })
+    .catch((err) => { console.error("Ошибка при удалении карточки:", err);
+    });
+}
+// Обработка клика на кнопку "лайк"
 export function handleLikeButtonClick(evt, cardId, likesCountElement) {
   const likeMethod = isCardLiked(evt.target) ? deleteCardLike : putCardLike;
   likeMethod(cardId)
@@ -51,10 +61,12 @@ export function handleLikeButtonClick(evt, cardId, likesCountElement) {
     .catch((err) => console.log(err));
 }
 
+// Проверяет имеет ли кнопка лайка соответствующий класс
 function isCardLiked(buttonElement) {
   return buttonElement.classList.contains("card__like-button_is-active");
 }
 
+// Обновляет текст элемента, отображающего количество лайков
 function renderLikesCount(likesCountElement, likesCount) {
   likesCountElement.textContent = likesCount;
 }

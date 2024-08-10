@@ -12,6 +12,7 @@ function showInputError(formElement, inputElement, errorMessage, validationConfi
     inputElement.classList.remove(validationConfig.inputErrorClass);
     errorElement.classList.remove(validationConfig.errorClass);
     errorElement.textContent = '';
+    inputElement.setCustomValidity('');
   };
   
   // Проверка валидности введенных данных
