@@ -1,39 +1,38 @@
 // Добавление класса popup_is-animated ко всем попапам при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  const popups = document.querySelectorAll('.popup');
-  popups.forEach(popup => {
-    popup.classList.add('popup_is-animated');
+document.addEventListener("DOMContentLoaded", () => {
+  const popups = document.querySelectorAll(".popup");
+  popups.forEach((popup) => {
+    popup.classList.add("popup_is-animated");
   });
 });
 
 // Функция открытия попапа
 export function openPopup(popup) {
-  popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', handleEscKey); // Добавляем обработчик нажатия клавиши Esc
-  popup.addEventListener('click', handleOverlayClick); // Добавляем обработчик клика по оверлею
+  popup.classList.add("popup_is-opened");
+  document.addEventListener("keydown", handleEscKey); // Добавляем обработчик нажатия клавиши Esc
+  popup.addEventListener("click", handleOverlayClick); // Добавляем обработчик клика по оверлею
 }
-  
+
 // Функция закрытия попапа
 export function closePopup(popup) {
-  popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', handleEscKey); // Удаляем обработчик нажатия клавиши Esc
-  popup.removeEventListener('click', handleOverlayClick); // Удаляем обработчик клика по оверлею
+  popup.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", handleEscKey); // Удаляем обработчик нажатия клавиши Esc
+  popup.removeEventListener("click", handleOverlayClick); // Удаляем обработчик клика по оверлею
 }
-  
+
 // Функция для закрытия попапа при нажатии клавиши Esc
 export function handleEscKey(event) {
-  if (event.key === 'Escape') {
-    const openPopup = document.querySelector('.popup_is-opened');
+  if (event.key === "Escape") {
+    const openPopup = document.querySelector(".popup_is-opened");
     if (openPopup) {
       closePopup(openPopup);
     }
   }
 }
-  
+
 // Функция для закрытия попапа по нажатию на оверлей
 export function handleOverlayClick(event) {
-  if (event.target.classList.contains('popup')) {
+  if (event.target.classList.contains("popup")) {
     closePopup(event.target);
   }
 }
-  

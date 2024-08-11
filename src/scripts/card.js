@@ -1,16 +1,9 @@
-import { putCardLike, deleteCardLike } from "../scripts/api.js";
+import { putCardLike, deleteCardLike, deleteCard } from "../scripts/api.js";
 const cardTemplate = document.querySelector("#card-template").content;
 
 // Функция создания карточки
-export function createCard(
-  card,
-  userId,
-  openImage,
-  likeButtonClickHandler,
-  deleteButtonClickHandler
-) {
+export function createCard( card, userId, openImage, likeButtonClickHandler, deleteButtonClickHandler) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-
   const cardImage = cardElement.querySelector(".card__image");
   cardImage.src = card.link;
   cardImage.alt = `Фотография ${card.name}`;
@@ -35,21 +28,23 @@ export function createCard(
     deleteButton.style.display = "none";
   } else {
     deleteButton.addEventListener("click", () =>
-      deleteButtonClickHandler(card._id, cardElement));
+      deleteButtonClickHandler(card._id, cardElement)
+    );
   }
-
   return cardElement;
 }
 
 // Функция удаления карточки
 export function deleteButtonClickHandler(cardId, cardElement) {
-  deleteCard (cardId)
+  deleteCard(cardId)
     .then(() => {
       cardElement.remove();
     })
-    .catch((err) => { console.error("Ошибка при удалении карточки:", err);
+    .catch((err) => {
+      console.error("Ошибка при удалении карточки:", err);
     });
 }
+
 // Обработка клика на кнопку "лайк"
 export function handleLikeButtonClick(evt, cardId, likesCountElement) {
   const likeMethod = isCardLiked(evt.target) ? deleteCardLike : putCardLike;

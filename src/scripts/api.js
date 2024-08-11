@@ -12,7 +12,9 @@ const checkRequest = (res) => {
     return res.json();
   } else {
     return res.json().then((error) => {
-      return Promise.reject(`Ошибка ${res.status}: ${error.message|| 'Неизвестная ошибка'}`);
+      return Promise.reject(
+        `Ошибка ${res.status}: ${error.message || "Неизвестная ошибка"}`
+      );
     });
   }
 };
@@ -54,7 +56,7 @@ export function updateUserInfo(name, about) {
     headers: config.headers,
     body: JSON.stringify({ name, about }),
   }).then(checkRequest);
-  }
+}
 
 // Добавление новой карточки
 export function addCardToServer(name, link) {
